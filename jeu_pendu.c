@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 #define SIZE 40
 
@@ -145,7 +146,6 @@ bool estGagne(char *etatRecherche){
     return true;
 }
 
-
 int main(){
     displayIntro();
 
@@ -157,6 +157,12 @@ int main(){
 
     printf("\nProposez un mot à chercher : ");
     scanf(" %s", motRecherche);
+
+    // Conversion caractères en minuscule
+    for(int i = 0; i < strlen(motRecherche); i++){
+        motRecherche[i] = tolower(motRecherche[i]);
+    }
+
     printf("\nCombien d'erreurs peut faire la personne ? ");
     scanf(" %d", &nbErreursMax);
     char tabLettresErreurs[nbErreursMax];
@@ -176,6 +182,7 @@ int main(){
         char caracterePropose;
         printf("Proposez une lettre : \n");
         scanf(" %c", &caracterePropose);
+        caracterePropose = tolower(caracterePropose);
         
         // Si le caractère est présent OU qu'on a déjà fait cette erreur:
         if (estPresent(caracterePropose, motRecherche) || dejaPropose(tabLettresErreurs, nbErreursMax, caracterePropose)){

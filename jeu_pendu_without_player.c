@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include <ctype.h>
-
+#include <unistd.h>
 
 #define SIZE 40
 #define NUM_ERREURS_MIN 8
@@ -150,14 +150,23 @@ bool estGagne(char *etatRecherche){
     return true;
 }
 
+char choisirCaractere(){
+    srand(time(NULL));
+    int index = 97 + rand() % 26;
+    char caractere = (char)index;
+    return caractere;
+}
+
 
 int main(){
+
     displayIntro();
 
     char* liste_mots[] = { "bonjour", "maison", "papillon", "artisan",
     "ruelle", "ordinateur", "chocolat", "fromage", "jardin", "etoile",
     "nuages", "cyclone", "robotique", "escargot", "chameau", "probleme",
     "terrasse", "bonsoir", "biscuit", "catastrophe" };
+
     int nb_mots = 20; //Nombre de mots dans liste_mots.
 
     // Proposer un mot et un nombre de chances
@@ -191,13 +200,12 @@ int main(){
 
         // Proposer une lettre qui pourrait être présente
         char caracterePropose;
+        sleep(5);
         printf("Proposez une lettre : \n");
-        scanf(" %c", &caracterePropose);
-        caracterePropose = tolower(caracterePropose);
+        caracterePropose = choisirCaractere();
         // Si le caractère est présent OU qu'on a déjà fait cette erreur:
         if (estPresent(caracterePropose, motRecherche) || dejaPropose(tabLettresErreurs, nbErreursMax, caracterePropose)){
             majChaineProposition(etatPropositionMot, motRecherche, caracterePropose);
-            
         }
         // sinon
         else {
