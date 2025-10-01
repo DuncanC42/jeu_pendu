@@ -167,25 +167,22 @@ char choisirCaractere(){
 */
 
 
-char* addFakeCharacter(char* word){
-    printf("taille %d\n", strlen(word));
-    char *finalWord[strlen(word) + 10];
-    printf("HEYHOH ADD FAKE CHARACTER\n");
-    strcpy(*finalWord, word);
-    printf("word => %s\n", strcat(*finalWord, "0"));
-    return strcat("0", *finalWord);
-}
 
 /* Mise en place de l'algorithme de Markov : */
 void markovAlgorithm(char * wordList[], int listLength){
-    char* nuWordList;
-    for (int i = 0; i < listLength; i++){
-        printf("TEST [%d]\n", i);
-        printf("truc %s", addFakeCharacter("waf"));
-        //strcpy(nuWordList[i], addFakeCharacter("waf"));
-        //printf("e => %s", nuWordList[i]);
+    // Tableau pour stocker les mots modifiés
+    char nuWordList[listLength][100];
+
+    for (int i = 0; i < listLength; i++) {
+        strcpy(nuWordList[i], "0");
+        strcat(nuWordList[i], wordList[i]);
+
+        printf("Mot original : %s | Modifié : %s\n", wordList[i], nuWordList[i]);
     }
+
+
 }
+
 
 /**
 *
